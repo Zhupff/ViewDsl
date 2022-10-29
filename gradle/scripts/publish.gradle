@@ -1,0 +1,17 @@
+apply plugin: "maven-publish"
+
+if (System.getenv("JITPACK") == "true") {
+    afterEvaluate {
+        publishing {
+            repositories {
+                it.mavenLocal()
+            }
+            publications {
+                jitpack(MavenPublication) {
+                    from components.release
+                    artifactId = project.name
+                }
+            }
+        }
+    }
+}
